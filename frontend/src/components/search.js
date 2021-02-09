@@ -1,7 +1,6 @@
 import React from 'react';
 import SearchInput from './searchInput';
 import SearchResults from './searchResults';
-import { fetchData } from '../shared/helper';
 
 class Search extends React.Component {
 	render() {
