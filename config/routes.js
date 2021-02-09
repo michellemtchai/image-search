@@ -13,5 +13,5 @@ module.exports = (app) =>{
     app.router.get('/', Application.index);
 
     app.router.get('/query/:query', ImageSearch.index);
-    app.router.get('/query/recent', ImageSearch.recent);
+    app.router.get('/recent', ImageSearch.recent);
 };

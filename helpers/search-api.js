@@ -3,7 +3,29 @@ const fetch = require('node-fetch');
 const queryString = require('query-string');
 
 module.exports = searchAPI = {
-    imageSearch: (req, res)=>{
+    imageSearch: (req, res, History)=>{
+        let handleHistory = data=>
+            searchAPI.saveHistory(req, res, History, data);
+        db.modelFind(History, res, handleHistory, {
+            sort: {
+                date: -1
+            },
+            limit: 1
+        })
+    },
+    saveHistory: (req, res, History, data)=>{
+        let query = req.params.query;
+        if(data.length==0 || data[0].query != query){
+            let model = new History({
+                query: query
+            })
+            db.modelSave(model, res, ()=>searchAPI.handleSearch(req, res));
+        }
+        else{
+            searchAPI.handleSearch(req, res);
+        }
+    },
+    handleSearch: (req, res)=>{
         let page = searchAPI.page(req);
         let url = searchAPI.searchURL(req, page);
         fetch(url)

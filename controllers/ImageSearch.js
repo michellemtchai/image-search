@@ -35,9 +35,8 @@ module.exports = ImageSearch = (app) =>{
          */
         index: (req, res) => {
             let required = ['query'];
-            common.requiredParams(req.params, res, required, ()=>{
-                searchAPI.imageSearch(req, res);
-            });
+            let searchImage = ()=>searchAPI.imageSearch(req, res, History);
+            common.requiredParams(req.params, res, required, searchImage);
          },
 
         /**
@@ -62,7 +61,17 @@ module.exports = ImageSearch = (app) =>{
          *     }
          */
         recent: (req, res) => {
-            db.renderAll(History, res);
+            db.renderAll(History, res, {
+                sort: {
+                    date: -1
+                },
+                limit: 10,
+                select: {
+                    _id: 0,
+                    __v: 0,
+                    date: 0
+                }
+            });
         }
     };
 };
