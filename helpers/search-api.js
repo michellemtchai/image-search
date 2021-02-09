@@ -78,7 +78,6 @@ module.exports = searchAPI = {
                     }
                 })
             };
-            res['pages'] = Math.ceil(res.totalResults / 10);
             return [false, res];
         }
     },
