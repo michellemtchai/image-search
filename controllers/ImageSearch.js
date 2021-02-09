@@ -30,10 +30,13 @@ module.exports = (app) =>{
          *     }
          */
         index: (req, res) => {
-            app.shared.modelFind(History, res,
-                items => res.json(items)
-            );
-        },
+            let required = ['query'];
+            app.shared.requiredParams(req.query, res, required, ()=>{
+                app.shared.modelFind(History, res,
+                    items => res.json(items)
+                );
+            });
+         },
 
         /**
          * @api {get} /search/recent Get all previous search result
