@@ -1,4 +1,5 @@
 import React from 'react';
+import Error from './error';
 import ToggleButton from './toggleButton';
 import Search from './search';
 import Recent from './recent';
@@ -9,6 +10,7 @@ class ImageSearch extends React.Component {
         let search = this.props.search.search;
 		return (
 			<div className='content'>
+                <Error {...this.props}/>
                 <ToggleButton {...this.props}/>
 				{
                     search ?
