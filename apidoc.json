@@ -1,0 +1,12 @@
+{
+  "name": "API Documentation",
+  "version": "1.0.0",
+  "description": "API Documentation of this app.",
+  "title": "API Documentation",
+  "url": "http://localhost:3000",
+  "sampleUrl": "http://localhost:3000",
+  "template": {
+  	"withCompare": true,
+  	"withGenerator": true
+  }
+}

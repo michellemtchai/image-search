@@ -1,0 +1,22 @@
+FROM node:14-alpine
+
+WORKDIR /
+
+# Install app dependencies
+COPY package*.json /
+
+# setup node environment
+ENV NODE_PATH=/node_modules
+ENV PATH=$PATH:$NODE_PATH/.bin
+
+# install packages
+RUN npm install
+
+# support symlinks
+RUN npm config set bin-links false
+
+# Create app directory
+WORKDIR /app
+
+# Bundle app source
+COPY . /app/

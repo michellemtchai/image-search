@@ -1,0 +1,27 @@
+{
+    "name": "docker-node-boilerplate",
+    "version": "1.0.0",
+    "description": "A Node.js app on Docker",
+    "author": "Michelle Chai",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/michellemtchai/docker-node-boilerplate.git"
+    },
+    "license" : "MIT",
+    "main": "server.js",
+    "scripts": {
+        "prod": "node server.js",
+        "start": "supervisor server.js",
+        "doc": "apidoc -i . -o ./.apidocs/ -f \".*\\.js$\" -f \".*\\.ts$\" -e ./node_modules -e ./.apidocs"
+    },
+    "dependencies": {
+        "apidoc": "^0.26.0",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "ejs": "^3.1.5",
+        "express": "^4.17.1",
+        "mongoose": "^5.11.14",
+        "supervisor": "^0.12.0"
+    }
+}
