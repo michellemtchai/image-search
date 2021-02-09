@@ -10,7 +10,13 @@ module.exports = searchAPI = {
             .then(response => response.json())
             .catch(common.errorResponse)
             .then(data => {
-                res.json(searchAPI.formatData(data, page))
+                let [error, response] = searchAPI.formatData(data,page);
+                if(error){
+                    common.renderError(res, response);
+                }
+                else {
+                    res.json(response);
+                }
             });
     },
     page: (req)=>{
@@ -33,14 +39,14 @@ module.exports = searchAPI = {
         return page ? parseInt(page) : 0;
     },
     formatData: (data, page)=>{
-        return data.hasOwnProperty('error')?
-            {
-                msg: data.error.message
-            }:
-            {
+        if(data.hasOwnProperty('error')){
+            return [true, data.error.message];
+        }
+        else{
+            let res = {
                 page: page == 0 ? 1 : page,
                 searchTime: data.searchInformation.formattedSearchTime,
-                totalResults: data.searchInformation.totalResults,
+                totalResults: parseInt(data.searchInformation.totalResults),
                 results: data.items.map(i=>{
                     return {
                         image: i.link,
@@ -50,5 +56,8 @@ module.exports = searchAPI = {
                     }
                 })
             };
+            res['pages'] = Math.ceil(res.totalResults / 10);
+            return [false, res];
+        }
     },
 };
