@@ -1,6 +1,9 @@
-module.exports = self = {
+module.exports = common = {
+    renderError: (res, message)=>{
+        res.status(404).json({ msg: message });
+    },
     errorResponse: (res)=>{
-        return (err)=>res.status(404).json({ msg: err.message });
+        return (err)=>common.renderError(res, err.message);
     },
     requiredParams: (params, res, required, action)=>{
         let lacking = [];
@@ -19,9 +22,7 @@ module.exports = self = {
                 let last = lacking.pop();
                 error = `${lacking.join(', ')} and ${last} are all required parameters.`;
             }
-            res.status(404).json({
-                msg: error
-            });
+            common.renderError(res, error);
         }
     },
 };
