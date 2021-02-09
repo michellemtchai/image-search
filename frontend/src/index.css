@@ -47,3 +47,22 @@ body{
 .button:hover{
     background: darkblue;
 }
+.entry{
+    width: 100%;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin: 10px 0;
+}
+.entry td:nth-child(1) {
+    width: 110px;
+}
+.entry td:nth-child(2) {
+    width: calc(100% - 110px);
+}
+.entry:hover{
+    background: #eee;
+}
+.entry img{
+    width: 100px;
+    margin: 10px 0;
+}

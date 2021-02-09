@@ -16,12 +16,20 @@ class SearchResult extends React.Component {
     }
 	render() {
         return (
-            <div className='entry'
+            <table className='entry'
                 onClick={()=>this.openInTab(this.props.page)}>
-                <img src={this.props.image}/>
-                <h2>{this.props.title}</h2>
-                <p>{this.props.description}</p>
-            </div>
+                <tbody>
+                <tr>
+                    <td>
+                        <img src={this.props.image}/>
+                    </td>
+                    <td>
+                        <h2 dangerouslySetInnerHTML={{__html: this.props.title}}></h2>
+                        <p dangerouslySetInnerHTML={{__html: this.props.description}}></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         );
   	}
 }
