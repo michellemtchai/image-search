@@ -1,3 +1,5 @@
+const common = require('../helpers/common');
+
 module.exports = (app) =>{
     let { History } = app.shared.models;
 
@@ -31,8 +33,8 @@ module.exports = (app) =>{
          */
         index: (req, res) => {
             let required = ['query'];
-            app.shared.requiredParams(req.query, res, required, ()=>{
-                app.shared.modelFind(History, res,
+            common.requiredParams(req.query, res, required, ()=>{
+                common.modelFind(History, res,
                     items => res.json(items)
                 );
             });
@@ -60,7 +62,7 @@ module.exports = (app) =>{
          *     }
          */
         recent: (req, res) => {
-            app.shared.modelFind(History, res,
+            common.modelFind(History, res,
                 items => res.json(items)
             );
         }
