@@ -25,4 +25,13 @@ module.exports = common = {
             common.renderError(res, error);
         }
     },
+    permit: (params, permitted)=>{
+        let result = {};
+        permitted.forEach(i=>{
+            if(params.hasOwnProperty(i)){
+                result[i] = params[i];
+            }
+        })
+        return result;
+    },
 };

@@ -1,7 +1,8 @@
 const common = require('../helpers/common');
 const db = require('../helpers/db');
+const searchAPI = require('../helpers/search-api');
 
-module.exports = (app) =>{
+module.exports = ImageSearch = (app) =>{
     let { History } = app.shared.models;
 
     return {
@@ -34,10 +35,8 @@ module.exports = (app) =>{
          */
         index: (req, res) => {
             let required = ['query'];
-            common.requiredParams(req.query, res, required, ()=>{
-                db.modelFind(History, res,
-                    items => res.json(items)
-                );
+            common.requiredParams(req.params, res, required, ()=>{
+                searchAPI.imageSearch(req, res);
             });
          },
 
