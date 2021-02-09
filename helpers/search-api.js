@@ -4,23 +4,29 @@ const queryString = require('query-string');
 
 module.exports = searchAPI = {
     imageSearch: (req, res)=>{
-        let limit = 10;
-        let page = req.query.hasOwnProperty('page')?
-            searchAPI.parsePage(req) : 0;
-        params = queryString.stringify({
-            key: process.env.API_KEY,
-            cx: process.env.CX,
-            q: req.params.query,
-            searchType: 'image',
-            start: (page * limit) + 1,
-        });
-        let url = `https://www.googleapis.com/customsearch/v1?${params}`;
+        let page = searchAPI.page(req);
+        let url = searchAPI.searchURL(req, page);
         fetch(url)
             .then(response => response.json())
             .catch(common.errorResponse)
             .then(data => {
                 res.json(searchAPI.formatData(data, page))
             });
+    },
+    page: (req)=>{
+        return req.query.hasOwnProperty('page')?
+            searchAPI.parsePage(req) : 0;
+    },
+    searchURL: (req, page)=>{
+        let limit = 10;
+        let params = queryString.stringify({
+            key: process.env.API_KEY,
+            cx: process.env.CX,
+            q: req.params.query,
+            searchType: 'image',
+            start: (page * limit) + 1,
+        });
+        return `https://www.googleapis.com/customsearch/v1?${params}`;
     },
     parsePage: (req)=>{
         let page = req.query.page.match(/^[0-9]+$/);
