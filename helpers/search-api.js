@@ -1,3 +1,4 @@
+let common = require('./common');
 const fetch = require('node-fetch');
 const queryString = require('query-string');
 
@@ -17,23 +18,28 @@ module.exports = searchAPI = {
         let url = `https://www.googleapis.com/customsearch/v1?${params}`;
         fetch(url)
             .then(response => response.json())
+            .catch(common.errorResponse)
             .then(data => {
                 res.json(searchAPI.formatData(data, page))
             });
     },
     formatData: (data, page)=>{
-        return {
-            page: page == 0 ? 1 : page,
-            searchTime: data.searchInformation.formattedSearchTime,
-            totalResults: data.searchInformation.totalResults,
-            results: data.items.map(i=>{
-                return {
-                    image: i.link,
-                    description: i.htmlSnippet,
-                    page: i.image.contextLink,
-                    title: i.htmlTitle,
-                }
-            })
-        }
+        return data.hasOwnProperty('error')?
+            {
+                msg: data.error.message
+            }:
+            {
+                page: page == 0 ? 1 : page,
+                searchTime: data.searchInformation.formattedSearchTime,
+                totalResults: data.searchInformation.totalResults,
+                results: data.items.map(i=>{
+                    return {
+                        image: i.link,
+                        description: i.htmlSnippet,
+                        page: i.image.contextLink,
+                        title: i.htmlTitle,
+                    }
+                })
+            };
     },
 };
