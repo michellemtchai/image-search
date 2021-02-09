@@ -15,8 +15,9 @@ class Recent extends React.Component {
 			<div>
                 <h1>Recent Search History</h1>
 				{this.props.search.recent.map((item,i)=>
-                    <div key={'recent-'+i}>
-                        <p>Term: {item.query}</p>
+                    <div className='entry'
+                        key={'recent-'+i}>
+                        <p><b>Term:</b> {item.query}</p>
                     </div>
                 )}
 			</div>
