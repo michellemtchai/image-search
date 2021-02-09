@@ -6,8 +6,7 @@ module.exports = searchAPI = {
     imageSearch: (req, res)=>{
         let limit = 10;
         let page = req.query.hasOwnProperty('page')?
-            parseInt(req.query.page) :
-            0;
+            searchAPI.parsePage(req) : 0;
         params = queryString.stringify({
             key: process.env.API_KEY,
             cx: process.env.CX,
@@ -22,6 +21,10 @@ module.exports = searchAPI = {
             .then(data => {
                 res.json(searchAPI.formatData(data, page))
             });
+    },
+    parsePage: (req)=>{
+        let page = req.query.page.match(/^[0-9]+$/);
+        return page ? parseInt(page) : 0;
     },
     formatData: (data, page)=>{
         return data.hasOwnProperty('error')?
