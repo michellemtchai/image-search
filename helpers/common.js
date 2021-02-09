@@ -24,14 +24,4 @@ module.exports = self = {
             });
         }
     },
-    modelFind: (model, res, next)=>{
-        model.find()
-            .then(next)
-            .catch(self.errorResponse(res));
-    },
-    modelSave: (model, res, next)=>{
-        model.save()
-            .then(next)
-            .catch(self.errorResponse(res));
-    }
 };

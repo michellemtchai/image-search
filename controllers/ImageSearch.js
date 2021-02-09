@@ -1,4 +1,5 @@
 const common = require('../helpers/common');
+const db = require('../helpers/db');
 
 module.exports = (app) =>{
     let { History } = app.shared.models;
@@ -34,7 +35,7 @@ module.exports = (app) =>{
         index: (req, res) => {
             let required = ['query'];
             common.requiredParams(req.query, res, required, ()=>{
-                common.modelFind(History, res,
+                db.modelFind(History, res,
                     items => res.json(items)
                 );
             });
@@ -62,9 +63,7 @@ module.exports = (app) =>{
          *     }
          */
         recent: (req, res) => {
-            common.modelFind(History, res,
-                items => res.json(items)
-            );
+            db.renderAll(History, res);
         }
     };
 };
