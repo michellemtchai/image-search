@@ -15,7 +15,7 @@ services:
     mongo-express:
         image: mongo-express
         ports:
-            - 8081:8081
+            - ${ME_PORT}:${ME_PORT}
         environment:
             ME_CONFIG_MONGODB_SERVER: ${DB_HOST}
             ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USERNAME}
