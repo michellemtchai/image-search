@@ -5,7 +5,15 @@
     </head>
     <body>
         <div id="root"></div>
-        <script src="assets/bundle.js"></script>
-        <link rel="stylesheet" href="assets/bundle.css">
+        <%if (process.env.APP_ENV == 'development') { %>
+            <p>
+                You're in development mode. Please visit
+                <a href="http://localhost:<%= process.env.FRONTEND_PORT %>">localhost:<%= process.env.FRONTEND_PORT %></a>
+                to see the frontend.
+            </p>
+        <% } else { %>
+            <script src="assets/bundle.js"></script>
+            <link rel="stylesheet" href="assets/bundle.css">
+        <% } %>
     </body>
 </html>
