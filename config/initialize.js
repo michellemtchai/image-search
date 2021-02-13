@@ -10,7 +10,7 @@ module.exports = (app) =>{
     app.router.use(bodyParser.json());
 
     // make static files in /public availiable
-    app.router.use('/static', app.express.static('public'));
+    app.router.use('/assets', app.express.static('public'));
 
     // set view engine as ejs
     app.router.set('view engine', 'ejs');

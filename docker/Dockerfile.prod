@@ -22,4 +22,4 @@ COPY . /app/
 RUN npm ci --only=production
 
 # copy react build files
-RUN mv -v /frontend/build/* /app/public
+RUN mv -v /frontend/build/assets/* /app/public

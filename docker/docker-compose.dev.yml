@@ -1,5 +1,14 @@
 version: "3.3"
 services:
+    frontend:
+        build:
+            context: ../frontend
+            dockerfile: ../docker/Dockerfile.frontend
+        command: yarn start
+        volumes:
+            - ../frontend:/app
+        ports:
+            - ${FRONTEND_PORT}:${FRONTEND_PORT}
     app:
         build:
             context: ..
@@ -7,12 +16,3 @@ services:
         command: npm start
         volumes:
             - ..:/app
-    frontend:
-        build:
-            context: ../frontend
-            dockerfile: ./docker/Dockerfile.dev
-        command: yarn start
-        volumes:
-            - ../frontend:/app
-        ports:
-            - ${FRONTEND_PORT}:${FRONTEND_PORT}
