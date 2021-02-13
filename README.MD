@@ -1,12 +1,4 @@
 # README
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-This project is a dockerized `Node` app that is organized to serve as a boilerplate for an web app. It organizes the features as listed in the following:
-- models (using MongoDB)
-- controllers (routes)
-- documentation (via APIDoc)
-- database management (via Mongo Express)
-
 ## Requirement
 You will need `Docker` to run this app.
 
