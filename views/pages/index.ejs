@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%- include('../partials/head'); %>
+        <%- include(rootPath + 'partials/head'); %>
     </head>
     <body>
+        <noscript>
+            You need to enable JavaScript to run this app.
+        </noscript>
         <div id="root"></div>
         <%if (process.env.APP_ENV == 'development') { %>
             <p>
@@ -12,8 +15,9 @@
                 to see the frontend.
             </p>
         <% } else { %>
-            <script src="assets/bundle.js"></script>
-            <link rel="stylesheet" href="assets/bundle.css">
+            <% for(let i = 0; i < assets.js.length; i++){ %>
+                <script src="<%= process.env.APP_PUBLIC_URL %>/<%= assets.js[i] %>"></script>
+            <% } %>
         <% } %>
     </body>
 </html>

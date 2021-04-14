@@ -7,9 +7,12 @@ services:
             APP_ENV: ${APP_ENV}
             APP_HOST: ${APP_HOST}
             APP_PORT: ${APP_PORT}
+            APP_PUBLIC_URL: ${APP_PUBLIC_URL}
             FRONTEND_PORT: ${FRONTEND_PORT}
             APP_TITLE: ${APP_TITLE}
             APP_DESC: ${APP_DESC}
+            APP_THEME_COLOR: ${APP_THEME_COLOR}
+            APP_BACKGROUND_COLOR: ${APP_BACKGROUND_COLOR}
             REACT_APP_TITLE: ${APP_TITLE}
             REACT_APP_DESC: ${APP_DESC}
             REACT_APP_HOST: ${APP_HOST}
