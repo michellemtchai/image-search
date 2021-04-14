@@ -1,26 +1,18 @@
-version: "3.3"
+version: '3'
 services:
     app:
         ports:
-            - ${PORT}:${PORT}
-    mongodb:
-        image: mongo
-        ports:
-            - ${DB_PORT}:${DB_PORT}
-        volumes:
-            - db_data:/data/db
+            - ${APP_PORT}:${APP_PORT}
         environment:
-            MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
-            MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
-    mongo-express:
-        image: mongo-express
-        ports:
-            - ${ME_PORT}:${ME_PORT}
-        environment:
-            ME_CONFIG_MONGODB_SERVER: ${DB_HOST}
-            ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USERNAME}
-            ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
-            ME_CONFIG_BASICAUTH_USERNAME: ${ME_USERNAME}
-            ME_CONFIG_BASICAUTH_PASSWORD: ${ME_PASSWORD}
-volumes:
-    db_data:
+            APP_ENV: ${APP_ENV}
+            APP_HOST: ${APP_HOST}
+            APP_PORT: ${APP_PORT}
+            FRONTEND_PORT: ${FRONTEND_PORT}
+            APP_TITLE: ${APP_TITLE}
+            APP_DESC: ${APP_DESC}
+            REACT_APP_TITLE: ${APP_TITLE}
+            REACT_APP_DESC: ${APP_DESC}
+            REACT_APP_HOST: ${APP_HOST}
+            REACT_APP_PORT: ${APP_PORT}
+            FAST_REFRESH: ${FAST_REFRESH}
+            CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING}

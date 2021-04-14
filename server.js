@@ -13,8 +13,8 @@ bootstrap(app, express);
 
 // start listening at port
 let server = app.listen(
-    process.env.PORT,
-    process.env.HOST,
+    process.env.APP_PORT,
+    process.env.APP_HOST,
     () => {
         console.log(
             'App listening at http://%s:%s',

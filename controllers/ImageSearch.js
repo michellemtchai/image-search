@@ -1,10 +1,7 @@
 const common = require('../helpers/common');
-const db = require('../helpers/db');
 const searchAPI = require('../helpers/search-api');
 
-module.exports = ImageSearch = (app) =>{
-    let { History } = app.shared.models;
-
+module.exports = ImageSearch = (app) => {
     return {
         /**
          * @api {get} /search Get result of image search given query
@@ -35,9 +32,15 @@ module.exports = ImageSearch = (app) =>{
          */
         index: (req, res) => {
             let required = ['query'];
-            let searchImage = ()=>searchAPI.imageSearch(req, res, History);
-            common.requiredParams(req.params, res, required, searchImage);
-         },
+            let searchImage = () =>
+                searchAPI.imageSearch(req, res);
+            common.requiredParams(
+                req.params,
+                res,
+                required,
+                searchImage
+            );
+        },
 
         /**
          * @api {get} /search/recent Get all previous search result
@@ -61,17 +64,7 @@ module.exports = ImageSearch = (app) =>{
          *     }
          */
         recent: (req, res) => {
-            db.renderAll(History, res, {
-                sort: {
-                    date: -1
-                },
-                limit: 10,
-                select: {
-                    _id: 0,
-                    __v: 0,
-                    date: 0
-                }
-            });
-        }
+            res.json([]);
+        },
     };
 };

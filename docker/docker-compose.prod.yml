@@ -1,9 +1,5 @@
-version: "3.3"
+version: '3.3'
 services:
-    mongodb:
-        restart: always
-    mongo-express:
-        restart: always
     app:
         build:
             context: ..
