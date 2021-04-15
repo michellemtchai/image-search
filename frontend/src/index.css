@@ -1,17 +1,18 @@
-body{
+body,
+* {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
-.content{
+.content {
     width: 60%;
     margin: 20px auto;
 }
-.content h1{
+.content h1 {
     width: 100%;
     text-align: center;
 }
-.error{
+.error {
     width: 80%;
     background: pink;
     border-radius: 10px;
@@ -20,7 +21,7 @@ body{
     font-weight: bold;
     padding: 20px;
 }
-.searchbar{
+.searchbar {
     margin: 0 10px;
     width: calc(100% - 35px);
     border: none;
@@ -28,11 +29,11 @@ body{
     font-size: 16px;
     height: 36px;
 }
-.searchbar:focus{
+.searchbar:focus {
     outline: none;
     border-bottom: 1px solid #000;
 }
-.button{
+.button {
     width: 100%;
     background: royalblue;
     border: none;
@@ -44,25 +45,42 @@ body{
     padding: 10px;
     cursor: pointer;
 }
-.button:hover{
+.button:hover {
     background: darkblue;
 }
-.entry{
+.results {
+    list-style: none;
+    padding: 0;
+}
+.results li:first-child {
+    margin: 15px 0;
+}
+.entry {
     width: 100%;
     border: 1px solid #eee;
-    padding: 10px;
     margin: 10px 0;
+    cursor: pointer;
 }
-.entry td:nth-child(1) {
-    width: 110px;
+.entry img {
+    width: 150px;
+    max-height: 120px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin: 10px;
 }
-.entry td:nth-child(2) {
-    width: calc(100% - 110px);
+.entry section {
+    width: calc(100% - 180px);
+    vertical-align: top;
+    display: inline-block;
 }
-.entry:hover{
+.entry section h2 {
+    font-size: 20px;
+    margin: 10px 5px;
+}
+.entry section p {
+    font-size: 16px;
+    margin: 5px;
+}
+.entry:hover {
     background: #eee;
-}
-.entry img{
-    width: 100px;
-    margin: 10px 0;
 }
