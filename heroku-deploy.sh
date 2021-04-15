@@ -1,5 +1,4 @@
 #! /bin/sh
-APP_PORT="$PORT"
 cp ./docker/prod.env .env
 
 yarn global add react-scripts

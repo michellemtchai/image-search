@@ -1,1 +1,1 @@
-web: yarn prod
+web: APP_PORT="$PORT" && yarn prod
