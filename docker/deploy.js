@@ -1,4 +1,7 @@
-require('dotenv').config({ path: '/app/.env' });
+const path = require('path');
+require('dotenv').config({
+    path: path.resolve(__dirname, '../.env'),
+});
 const fs = require('fs');
 const ejs = require('ejs');
 const manifestData = require('../assets/manifest');
@@ -27,16 +30,20 @@ const getScript = (data) => {
     return script;
 };
 const readFile = (file, action) => {
-    fs.readFile(file, 'utf8', (err, data) => {
-        if (err) {
-            console.log(err.message);
-        } else {
-            action(data);
+    fs.readFile(
+        path.resolve(__dirname, file),
+        'utf8',
+        (err, data) => {
+            if (err) {
+                console.log(err.message);
+            } else {
+                action(data);
+            }
         }
-    });
+    );
 };
 const writeFile = (file, data) => {
-    fs.writeFile(file, data, (err) => {
+    fs.writeFile(path.resolve(__dirname, file), data, (err) => {
         if (err) {
             console.log(err.message);
         } else {
@@ -46,9 +53,11 @@ const writeFile = (file, data) => {
 };
 
 const rewriteIndex = (css, js) => {
-    readFile('/app/views/pages/index.ejs', (data) => {
+    readFile('../views/pages/index.ejs', (data) => {
+        let viewsPath =
+            path.resolve(__dirname, '../views/') + '/';
         let html = ejs.render(data, {
-            rootPath: '/app/views/',
+            rootPath: viewsPath,
             icons: manifestData.icons,
             process: {
                 env: process.env,
@@ -58,12 +67,12 @@ const rewriteIndex = (css, js) => {
                 js: js,
             },
         });
-        writeFile('/app/public/index.html', html);
+        writeFile('../public/index.html', html);
     });
 };
 
-readFile('/app/public/index.html', (data) => {
-    writeFile('/app/public/setup.js', getScript(data));
+readFile('../public/index.html', (data) => {
+    writeFile('../public/setup.js', getScript(data));
     let css = getFileList(data, cssRegex);
     let js = ['setup.js', ...getFileList(data, jsRegex)];
     rewriteIndex(css, js);

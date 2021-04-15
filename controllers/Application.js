@@ -10,7 +10,9 @@ module.exports = (app) => {
          */
         index: (req, res) => {
             if (process.env.APP_ENV === 'production') {
-                res.sendFile('/app/public/index.html');
+                res.sendFile(
+                    `${app.rootPath}/public/index.html`
+                );
             } else {
                 res.render('pages/index', {
                     rootPath: '../',
@@ -39,7 +41,7 @@ module.exports = (app) => {
          * @apiGroup Application
          */
         robots: (req, res) => {
-            res.sendFile('/app/assets/robots.txt');
+            res.sendFile(`${app.rootPath}/assets/robots.txt`);
         },
     };
 };

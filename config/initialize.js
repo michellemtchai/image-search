@@ -8,7 +8,9 @@ module.exports = (app) => {
     app.router.use(compression());
 
     // set favicon
-    app.router.use(favicon('/app/public/favicon.ico'));
+    app.router.use(
+        favicon(`${app.rootPath}/public/favicon.ico`)
+    );
 
     if (process.env.APP_ENV == 'development') {
         // allow cross-origin requests

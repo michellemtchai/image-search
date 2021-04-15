@@ -3,6 +3,7 @@ module.exports = (router, express) => {
         router: router,
         express: express,
         shared: require('./shared'),
+        rootPath: require('path').resolve(__dirname, '../'),
     };
 
     // initialize app
