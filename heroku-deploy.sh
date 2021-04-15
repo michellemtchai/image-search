@@ -9,6 +9,6 @@ yarn install --production
 yarn build
 
 cd ../
-mv /app/frontend/build/* /app/public
-node /app/docker/deploy.js
+mv ./frontend/build/* ./public
+node ./docker/deploy.js
 rm .env
