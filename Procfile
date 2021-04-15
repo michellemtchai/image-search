@@ -1,1 +1,1 @@
-web: bash ./heroku-deploy.sh
+web: yarn build
