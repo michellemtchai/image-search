@@ -33,7 +33,7 @@ module.exports = searchAPI = {
         let url = searchAPI.searchURL(req, page);
         let cacheValue = searchData.get(url);
         if (cacheValue) {
-            res.json(searchData);
+            res.json(cacheValue);
         } else {
             if (searchData.keys().length < 100) {
                 fetch(url)
