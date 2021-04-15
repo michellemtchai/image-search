@@ -1,12 +1,13 @@
 #! /bin/sh
-RUN yarn global add react-scripts
-RUN yarn install --production
+yarn global add react-scripts
+yarn install --production
 
 cd ./frontend
-RUN yarn install --production
-RUN yarn build
+yarn install --production
+yarn build
 
 cd ../
-RUN mv /app/frontend/build/* /app/public
-RUN node /app/docker/deploy.js
-RUN rm .env
+mv /app/frontend/build/* /app/public
+node /app/docker/deploy.js
+rm .env
+yarn prod
