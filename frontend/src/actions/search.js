@@ -2,7 +2,6 @@ export const SET_SEARCH = 'SET_SEARCH';
 export const SET_RECENT = 'SET_RECENT';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_INPUT = 'SET_INPUT';
-export const SET_PAGE = 'SET_PAGE';
 export const TOGGLE_TAB = 'TOGGLE_TAB';
 
 const setSearch = (data) => {
@@ -17,10 +16,11 @@ const setRecent = (data) => {
         data: data,
     };
 };
-const setError = (data) => {
+const setError = (data, key) => {
     return {
         type: SET_ERROR,
         data: data,
+        key: key,
     };
 };
 const setInput = (data) => {
@@ -43,8 +43,8 @@ export const map = (dispatch) => {
         setRecent: (data) => {
             dispatch(setRecent(data));
         },
-        setError: (data) => {
-            dispatch(setError(data));
+        setError: (data, key) => {
+            dispatch(setError(data, key));
         },
         setInput: (data) => {
             dispatch(setInput(data));

@@ -4,7 +4,7 @@ import Pagination from './pagination';
 
 class SearchResults extends React.Component {
     state = {
-        page: this.props.page,
+        page: 1,
     };
     updatePage = (page) => {
         this.setState({
@@ -14,7 +14,7 @@ class SearchResults extends React.Component {
     render() {
         let data = this.props.search.results;
         if (Object.keys(data).length > 0) {
-            let pages = data.totalResults / 10;
+            let pages = Math.ceil(data.totalResults / 10);
             pages = pages > 19 ? 19 : pages;
             return (
                 <ul className="results">
@@ -25,7 +25,7 @@ class SearchResults extends React.Component {
                     <Pagination
                         {...this.props}
                         pages={pages}
-                        page={data.page}
+                        page={this.state.page}
                         updatePage={this.updatePage}
                     />
                     {data.results.map((item, i) => (
@@ -37,7 +37,7 @@ class SearchResults extends React.Component {
                     <Pagination
                         {...this.props}
                         pages={pages}
-                        page={data.page}
+                        page={this.state.page}
                         updatePage={this.updatePage}
                     />
                 </ul>

@@ -12,15 +12,16 @@ export const searchTerm = (props, page) => {
 			props.setSearch(data);
 			setRecentSearches(props);
 		};
-		fetchData(url, next, props.setError);
+		fetchData(url, next, props.setError, 'results');
 	}
 };
 export const setRecentSearches = (props) => {
 	let url = `${SERVER_ROOT}/recent`;
-	fetchData(url, props.setRecent, props.setError);
+	fetchData(url, props.setRecent, props.setError, 'recent');
 };
-export const fetchData = (url, stateFn, errorFn) => {
+export const fetchData = (url, stateFn, errorFn, key) => {
 	url = encodeURI(url);
+	let containsError = false;
 	fetch(url, {
 		method: 'GET',
 		mode: 'cors',
@@ -33,15 +34,15 @@ export const fetchData = (url, stateFn, errorFn) => {
 	})
 		.then((res) => {
 			if (res.status != 200) {
-				throw Error(res.statusText);
+				containsError = true;
 			}
 			return res.json();
 		})
 		.then((data) => {
-			stateFn(data);
-			errorFn('');
-		})
-		.catch((error) => {
-			errorFn(error.toString());
+			if (!containsError) {
+				stateFn(data);
+			} else {
+				errorFn(data.msg, key);
+			}
 		});
 };

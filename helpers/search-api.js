@@ -17,7 +17,7 @@ module.exports = searchAPI = {
             date,
             {
                 query: decodeURIComponent(query),
-                page: page,
+                page: page + 1,
             },
             oneDayInSec
         );
@@ -54,7 +54,8 @@ module.exports = searchAPI = {
                             );
                             res.json(response);
                         }
-                    });
+                    })
+                    .catch(common.errorResponse);
             } else {
                 common.renderError(res, hundredSearchesError);
             }
@@ -78,29 +79,34 @@ module.exports = searchAPI = {
     },
     parsePage: (req) => {
         let page = req.query.page.match(/^[0-9]+$/);
-        return page ? parseInt(page) : 0;
+        return page ? parseInt(page) - 1 : 0;
     },
     formatData: (data, page) => {
         if (data.hasOwnProperty('error')) {
             return [true, data.error.message];
         } else {
-            let res = {
-                page: page == 0 ? 1 : page,
-                searchTime:
-                    data.searchInformation.formattedSearchTime,
-                totalResults: parseInt(
-                    data.searchInformation.totalResults
-                ),
-                results: data.items.map((i) => {
-                    return {
-                        image: i.link,
-                        description: i.htmlSnippet,
-                        page: i.image.contextLink,
-                        title: i.htmlTitle,
-                    };
-                }),
-            };
-            return [false, res];
+            try {
+                let result = {
+                    page: page == 0 ? 1 : page + 1,
+                    searchTime:
+                        data.searchInformation
+                            .formattedSearchTime,
+                    totalResults: parseInt(
+                        data.searchInformation.totalResults
+                    ),
+                    results: data.items.map((i) => {
+                        return {
+                            image: i.link,
+                            description: i.htmlSnippet,
+                            page: i.image.contextLink,
+                            title: i.htmlTitle,
+                        };
+                    }),
+                };
+                return [false, result];
+            } catch (error) {
+                return [true, error.message];
+            }
         }
     },
 };

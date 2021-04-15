@@ -14,8 +14,8 @@ body,
     margin: 10px 0;
 }
 .error {
-    width: 80%;
-    background: pink;
+    width: calc(100% - 40px);
+    background: lavenderblush;
     border-radius: 10px;
     margin: 20px auto;
     color: red;
