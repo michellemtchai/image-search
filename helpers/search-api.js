@@ -1,48 +1,57 @@
 let common = require('./common');
 const fetch = require('node-fetch');
 const queryString = require('query-string');
+const NodeCache = require('node-cache');
+const searchData = new NodeCache();
+const searchHistory = new NodeCache();
+const oneDayInSec = 60 * 60 * 24;
+const hundredSearchesError =
+    '100 searches have already been made today. Please wait until tomorrow to try again.';
 
 module.exports = searchAPI = {
     imageSearch: (req, res) => {
-        let handleHistory = (data) =>
-            searchAPI.saveHistory(req, res, data);
-        db.modelFind(History, res, handleHistory, {
-            sort: {
-                date: -1,
-            },
-            limit: 1,
-        });
+        let query = req.params.query;
+        let date = new Date().getTime();
+        searchHistory.set(date, query, oneDayInSec);
+        searchAPI.handleSearch(req, res);
     },
-    saveHistory: (req, res, data) => {
-        // let query = req.params.query;
-        // if(data.length==0 || data[0].query != query){
-        //     let model = new History({
-        //         query: query
-        //     })
-        //     db.modelSave(model, res, ()=>searchAPI.handleSearch(req, res));
-        // }
-        // else{
-        //     searchAPI.handleSearch(req, res);
-        // }
-        console.log('save history');
+    getHistory: () => {
+        let keys = searchHistory.keys();
+        let data = searchHistory.mget(keys);
+        console.log('history', data, keys);
+        return keys.map((key) => data[key]);
     },
     handleSearch: (req, res) => {
         let page = searchAPI.page(req);
         let url = searchAPI.searchURL(req, page);
-        fetch(url)
-            .then((response) => response.json())
-            .catch(common.errorResponse)
-            .then((data) => {
-                let [error, response] = searchAPI.formatData(
-                    data,
-                    page
-                );
-                if (error) {
-                    common.renderError(res, response);
-                } else {
-                    res.json(response);
-                }
-            });
+        let cacheValue = searchData.get(url);
+        if (cacheValue) {
+            res.json(searchData);
+        } else {
+            if (searchData.keys().length < 100) {
+                fetch(url)
+                    .then((response) => response.json())
+                    .catch(common.errorResponse)
+                    .then((data) => {
+                        let [
+                            error,
+                            response,
+                        ] = searchAPI.formatData(data, page);
+                        if (error) {
+                            common.renderError(res, response);
+                        } else {
+                            searchData.set(
+                                url,
+                                response,
+                                oneDayInSec
+                            );
+                            res.json(response);
+                        }
+                    });
+            } else {
+                common.renderError(res, hundredSearchesError);
+            }
+        }
     },
     page: (req) => {
         return req.query.hasOwnProperty('page')

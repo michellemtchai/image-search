@@ -64,7 +64,7 @@ module.exports = ImageSearch = (app) => {
          *     }
          */
         recent: (req, res) => {
-            res.json([]);
+            res.json(searchAPI.getHistory());
         },
     };
 };
