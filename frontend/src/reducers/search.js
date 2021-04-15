@@ -38,6 +38,8 @@ export const search = (state = initialState, action) => {
 			};
 		case actions.SET_INPUT:
 			return { ...state, input: action.data };
+		case actions.SET_PAGE:
+			return { ...state, page: action.data };
 		case actions.TOGGLE_TAB:
 			return { ...state, search: !state.search };
 		case actions.START_FETCH:

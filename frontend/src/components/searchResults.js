@@ -4,14 +4,6 @@ import Pagination from './pagination';
 import loader from '../assets/loader.gif';
 
 class SearchResults extends React.Component {
-    state = {
-        page: 1,
-    };
-    updatePage = (page) => {
-        this.setState({
-            page: page,
-        });
-    };
     render() {
         let data = this.props.search.results;
         if (Object.keys(data).length > 0) {
@@ -33,8 +25,6 @@ class SearchResults extends React.Component {
                         <Pagination
                             {...this.props}
                             pages={pages}
-                            page={this.state.page}
-                            updatePage={this.updatePage}
                         />
                         {data.results.map((item, i) => (
                             <SearchResult
@@ -45,8 +35,6 @@ class SearchResults extends React.Component {
                         <Pagination
                             {...this.props}
                             pages={pages}
-                            page={this.state.page}
-                            updatePage={this.updatePage}
                         />
                     </ul>
                 );

@@ -13,6 +13,7 @@ export const searchTerm = (props, page) => {
 			setRecentSearches(props);
 		};
 		props.startFetching();
+		props.setPage(page);
 		fetchData(url, next, props.setError, 'results');
 	}
 };

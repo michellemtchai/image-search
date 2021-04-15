@@ -2,30 +2,13 @@ import React from 'react';
 import { searchTerm } from '../shared/helper';
 
 class Pagination extends React.Component {
-    state = {
-        page: this.props.page,
-    };
     setPage = (increment) => {
-        this.setState(
-            {
-                page: this.state.page + increment,
-            },
-            () => {
-                this.props.updatePage(this.state.page);
-                searchTerm(this.props, this.state.page);
-                scroll(0, 0);
-            }
-        );
+        let newPage = this.props.search.page + increment;
+        searchTerm(this.props, newPage);
+        scroll(0, 0);
     };
-    componentDidUpdate(prevProps) {
-        if (prevProps.page != this.props.page) {
-            this.setState({
-                page: this.props.page,
-            });
-        }
-    }
     render() {
-        let page = this.state.page;
+        let page = this.props.search.page;
         let pages = this.props.pages;
         return (
             <li className="pagination">
