@@ -24,7 +24,7 @@ module.exports = searchAPI = {
         searchAPI.handleSearch(req, res);
     },
     getHistory: () => {
-        let keys = searchHistory.keys().sort();
+        let keys = searchHistory.keys().sort((a, b) => b - a);
         let data = searchHistory.mget(keys);
         return keys.map((key) => data[key]);
     },
