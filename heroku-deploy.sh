@@ -1,6 +1,7 @@
 #! /bin/sh
 cp ./docker/prod.env .env
 
+yarn global add react-scripts
 yarn install --production
 
 cd ./frontend
