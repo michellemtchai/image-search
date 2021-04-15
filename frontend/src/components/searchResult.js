@@ -1,31 +1,24 @@
 import React from 'react';
 
 class SearchResult extends React.Component {
-    openInTab = (url) => {
-        Object.assign(document.createElement('a'), {
-            target: '_blank',
-            href: url,
-        }).click();
-    };
     render() {
         return (
-            <li
-                className="entry"
-                onClick={() => this.openInTab(this.props.page)}
-            >
-                <img src={this.props.image} />
-                <section>
-                    <h2
-                        dangerouslySetInnerHTML={{
-                            __html: this.props.title,
-                        }}
-                    ></h2>
-                    <p
-                        dangerouslySetInnerHTML={{
-                            __html: this.props.description,
-                        }}
-                    ></p>
-                </section>
+            <li className="entry">
+                <a href={this.props.page} target="_blank">
+                    <img src={this.props.image} />
+                    <section>
+                        <h2
+                            dangerouslySetInnerHTML={{
+                                __html: this.props.title,
+                            }}
+                        ></h2>
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: this.props.description,
+                            }}
+                        ></p>
+                    </section>
+                </a>
             </li>
         );
     }

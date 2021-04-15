@@ -11,6 +11,7 @@ body,
 .content h1 {
     width: 100%;
     text-align: center;
+    margin: 10px 0;
 }
 .error {
     width: 80%;
@@ -60,6 +61,11 @@ body,
     border: 1px solid #eee;
     margin: 10px 0;
     cursor: pointer;
+}
+.entry a {
+    color: #000;
+    text-decoration: none;
+    display: block;
 }
 .entry img {
     width: 150px;

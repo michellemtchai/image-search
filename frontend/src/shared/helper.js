@@ -1,7 +1,12 @@
+const SERVER_ROOT =
+	process.env.REACT_APP_ENV === 'development'
+		? `http://localhost:${process.env.REACT_APP_PORT}`
+		: '';
 export const searchTerm = (props) => {
-	if (props.search.input.trim().length > 0) {
-		let url = `http://localhost:3000/query/${encodeURIComponent(
-			props.search.input
+	let input = props.search.input.trim();
+	if (input.length > 0) {
+		let url = `${SERVER_ROOT}/query/${encodeURIComponent(
+			input
 		)}?page=${props.search.page}`;
 		let next = (data) => {
 			props.setSearch(data);
@@ -11,7 +16,7 @@ export const searchTerm = (props) => {
 	}
 };
 export const setRecentSearches = (props) => {
-	let url = 'http://localhost:3000/recent';
+	let url = `${SERVER_ROOT}/recent`;
 	fetchData(url, props.setRecent, props.setError);
 };
 export const fetchData = (url, stateFn, errorFn) => {

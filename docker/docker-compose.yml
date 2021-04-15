@@ -15,6 +15,7 @@ services:
             APP_BACKGROUND_COLOR: ${APP_BACKGROUND_COLOR}
             REACT_APP_TITLE: ${APP_TITLE}
             REACT_APP_DESC: ${APP_DESC}
+            REACT_APP_ENV: ${APP_ENV}
             REACT_APP_HOST: ${APP_HOST}
             REACT_APP_PORT: ${APP_PORT}
             FAST_REFRESH: ${FAST_REFRESH}
