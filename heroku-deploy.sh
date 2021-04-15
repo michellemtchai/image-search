@@ -10,4 +10,3 @@ cd ../
 mv /app/frontend/build/* /app/public
 node /app/docker/deploy.js
 rm .env
-yarn prod
