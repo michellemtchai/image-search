@@ -1,6 +1,6 @@
 module.exports = {
-    short_name: process.env.APP_NAME,
-    name: process.env.APP_NAME,
+    short_name: process.env.APP_TITLE,
+    name: process.env.APP_TITLE,
     icons: [
         {
             src: process.env.APP_PUBLIC_URL + '/favicon.ico',
