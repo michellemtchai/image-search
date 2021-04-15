@@ -16,7 +16,7 @@ module.exports = searchAPI = {
         searchHistory.set(
             date,
             {
-                query: query,
+                query: decodeURIComponent(query),
                 page: page,
             },
             oneDayInSec
