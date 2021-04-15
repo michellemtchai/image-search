@@ -1,1 +1,1 @@
-web: APP_PORT="$PORT" && yarn prod
+web: export APP_PORT=$PORT && yarn prod
