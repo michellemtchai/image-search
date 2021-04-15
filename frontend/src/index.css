@@ -111,6 +111,10 @@ body,
 .pagination button {
     display: inline-block;
     padding: 5px 10px;
+    cursor: pointer;
+}
+.pagination button:disabled {
+    cursor: not-allowed;
 }
 .pagination p {
     display: inline-block;
