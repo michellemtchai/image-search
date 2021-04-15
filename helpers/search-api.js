@@ -5,8 +5,6 @@ const NodeCache = require('node-cache');
 const searchData = new NodeCache();
 const searchHistory = new NodeCache();
 const oneDayInSec = 60 * 60 * 24;
-const hundredSearchesError =
-    '100 searches have already been made today. Please wait until tomorrow to try again.';
 
 module.exports = searchAPI = {
     imageSearch: (req, res) => {
@@ -35,30 +33,26 @@ module.exports = searchAPI = {
         if (cacheValue) {
             res.json(cacheValue);
         } else {
-            if (searchData.keys().length < 100) {
-                fetch(url)
-                    .then((response) => response.json())
-                    .catch(common.errorResponse)
-                    .then((data) => {
-                        let [
-                            error,
+            fetch(url)
+                .then((response) => response.json())
+                .catch(common.errorResponse)
+                .then((data) => {
+                    let [error, response] = searchAPI.formatData(
+                        data,
+                        page
+                    );
+                    if (error) {
+                        common.renderError(res, response);
+                    } else {
+                        searchData.set(
+                            url,
                             response,
-                        ] = searchAPI.formatData(data, page);
-                        if (error) {
-                            common.renderError(res, response);
-                        } else {
-                            searchData.set(
-                                url,
-                                response,
-                                oneDayInSec
-                            );
-                            res.json(response);
-                        }
-                    })
-                    .catch(common.errorResponse);
-            } else {
-                common.renderError(res, hundredSearchesError);
-            }
+                            oneDayInSec
+                        );
+                        res.json(response);
+                    }
+                })
+                .catch(common.errorResponse);
         }
     },
     page: (req) => {
