@@ -60,19 +60,33 @@ body,
     width: 100%;
     border: 1px solid #eee;
     margin: 10px 0;
-    cursor: pointer;
 }
 .entry a {
     color: #000;
     text-decoration: none;
     display: block;
+    cursor: pointer;
+    padding: 0;
+}
+.entry a:hover {
+    background: #eee;
+}
+.entry a:active {
+    background: #ddd;
 }
 .entry img {
     width: 150px;
     max-height: 120px;
-    border: 1px solid #ddd;
+    border: 2px solid #ccc;
     display: inline-block;
     margin: 10px;
+    background: #fff;
+}
+.entry a:hover img {
+    border: 2px solid #aaa;
+}
+.entry a:active img {
+    border: 2px solid #777;
 }
 .entry section {
     width: calc(100% - 180px);
@@ -87,6 +101,6 @@ body,
     font-size: 16px;
     margin: 5px;
 }
-.entry:hover {
-    background: #eee;
+.entry > p {
+    padding: 10px;
 }
