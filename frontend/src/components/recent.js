@@ -12,7 +12,9 @@ class Recent extends React.Component {
                 {this.props.search.recent.map((item, i) => (
                     <div className="entry" key={'recent-' + i}>
                         <p>
-                            <b>Term:</b> {item}
+                            <b>Term:</b> {item.query}
+                            <br />
+                            <b>Page:</b> {item.page}
                         </p>
                     </div>
                 ))}

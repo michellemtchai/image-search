@@ -12,7 +12,15 @@ module.exports = searchAPI = {
     imageSearch: (req, res) => {
         let query = req.params.query;
         let date = new Date().getTime();
-        searchHistory.set(date, query, oneDayInSec);
+        let page = searchAPI.page(req);
+        searchHistory.set(
+            date,
+            {
+                query: query,
+                page: page,
+            },
+            oneDayInSec
+        );
         searchAPI.handleSearch(req, res);
     },
     getHistory: () => {
