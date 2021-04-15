@@ -1,1 +1,1 @@
-web: ./heroku-deploy.sh
+web: bash ./heroku-deploy.sh
