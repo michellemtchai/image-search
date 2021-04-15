@@ -1,14 +1,9 @@
 import React from 'react';
-import { fetchData } from '../shared/helper';
+import { setRecentSearches } from '../shared/helper';
 
 class Recent extends React.Component {
     componentDidMount() {
-        let url = 'http://localhost:3000/recent';
-        fetchData(
-            url,
-            this.props.setRecent,
-            this.props.setError
-        );
+        setRecentSearches(this.props);
     }
     render() {
         return (

@@ -1,47 +1,42 @@
-export const fetchData = (url, stateFn, errorFn)=>{
-	url = encodeURI(url);
-	const cacheData = localStorage.getItem(url);
-	if(cacheData){
-		let data = JSON.parse(cacheData);
-		if(timeDiffMinutes(data.date) > 5){
-			localStorage.removeItem(url);
-			fetchData(url, stateFn, errorFn);
-		}
-		else{
-			stateFn(data.data);
-		}
+export const searchTerm = (props) => {
+	if (props.search.input.trim().length > 0) {
+		let url = `http://localhost:3000/query/${encodeURIComponent(
+			props.search.input
+		)}?page=${props.search.page}`;
+		let next = (data) => {
+			props.setSearch(data);
+			setRecentSearches(props);
+		};
+		fetchData(url, next, props.setError);
 	}
-	else{
-		fetch(url,{
-	    	method: 'GET',
-		    mode: 'cors',
-		    cache: 'no-cache',
-		    credentials: 'same-origin',
-		    headers: {
-		      'Content-Type': 'application/json'
-		    },
-		    referrerPolicy: 'no-referrer'
-		})
-		.then(res=>{
-			if(res.status != 200){
+};
+export const setRecentSearches = (props) => {
+	let url = 'http://localhost:3000/recent';
+	fetchData(url, props.setRecent, props.setError);
+};
+export const fetchData = (url, stateFn, errorFn) => {
+	url = encodeURI(url);
+	fetch(url, {
+		method: 'GET',
+		mode: 'cors',
+		cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		referrerPolicy: 'no-referrer',
+	})
+		.then((res) => {
+			if (res.status != 200) {
 				throw Error(res.statusText);
 			}
 			return res.json();
 		})
-		.then(data=>{
-			localStorage.setItem(url, JSON.stringify({
-				date: Date.now(),
-				data: data,
-			}));
+		.then((data) => {
 			stateFn(data);
 			errorFn('');
 		})
-		.catch(error=>{
-	        errorFn(error.toString());
-	    });
-	}
-}
-export const timeDiffMinutes = (date)=>{
-	let diffMs = (new Date() - date);
-	return Math.round(((diffMs % 86400000) % 3600000) / 60000);
-}
+		.catch((error) => {
+			errorFn(error.toString());
+		});
+};
