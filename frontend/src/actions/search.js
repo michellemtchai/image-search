@@ -3,6 +3,7 @@ export const SET_RECENT = 'SET_RECENT';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_INPUT = 'SET_INPUT';
 export const TOGGLE_TAB = 'TOGGLE_TAB';
+export const START_FETCH = 'START_FETCH';
 
 const setSearch = (data) => {
     return {
@@ -34,6 +35,11 @@ const toggleButton = () => {
         type: TOGGLE_TAB,
     };
 };
+const startFetching = () => {
+    return {
+        type: START_FETCH,
+    };
+};
 
 export const map = (dispatch) => {
     return {
@@ -51,6 +57,9 @@ export const map = (dispatch) => {
         },
         toggleButton: () => {
             dispatch(toggleButton());
+        },
+        startFetching: () => {
+            dispatch(startFetching());
         },
     };
 };

@@ -12,11 +12,13 @@ export const searchTerm = (props, page) => {
 			props.setSearch(data);
 			setRecentSearches(props);
 		};
+		props.startFetching();
 		fetchData(url, next, props.setError, 'results');
 	}
 };
 export const setRecentSearches = (props) => {
 	let url = `${SERVER_ROOT}/recent`;
+	props.startFetching();
 	fetchData(url, props.setRecent, props.setError, 'recent');
 };
 export const fetchData = (url, stateFn, errorFn, key) => {
