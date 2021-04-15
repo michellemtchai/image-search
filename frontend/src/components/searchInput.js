@@ -7,7 +7,7 @@ class SearchInput extends React.Component {
     };
     detectKey = (event) => {
         if (event.keyCode === 13) {
-            searchTerm(this.props);
+            searchTerm(this.props, 1);
         }
     };
     render() {

@@ -8,58 +8,49 @@ export const TOGGLE_TAB = 'TOGGLE_TAB';
 const setSearch = (data) => {
     return {
         type: SET_SEARCH,
-        data: data
+        data: data,
     };
-}
+};
 const setRecent = (data) => {
     return {
         type: SET_RECENT,
-        data: data
+        data: data,
     };
-}
+};
 const setError = (data) => {
-	return {
-		type: SET_ERROR,
-		data: data
-	}
-}
+    return {
+        type: SET_ERROR,
+        data: data,
+    };
+};
 const setInput = (data) => {
     return {
         type: SET_INPUT,
-        data: data
+        data: data,
     };
-}
-const setPage = (data) => {
-    return {
-        type: SET_PAGE,
-        data: data
-    };
-}
+};
 const toggleButton = () => {
     return {
         type: TOGGLE_TAB,
     };
-}
+};
 
 export const map = (dispatch) => {
-  return {
-    setSearch: (data)=>{
-        dispatch(setSearch(data));
-    },
-    setRecent: (data)=>{
-        dispatch(setRecent(data));
-    },
-    setError: (data)=>{
-    	dispatch(setError(data));
-    },
-    setInput: (data)=>{
-        dispatch(setInput(data));
-    },
-    setPage: (data)=>{
-        dispatch(setPage(data));
-    },
-    toggleButton: ()=>{
-        dispatch(toggleButton());
-    },
-  };
+    return {
+        setSearch: (data) => {
+            dispatch(setSearch(data));
+        },
+        setRecent: (data) => {
+            dispatch(setRecent(data));
+        },
+        setError: (data) => {
+            dispatch(setError(data));
+        },
+        setInput: (data) => {
+            dispatch(setInput(data));
+        },
+        toggleButton: () => {
+            dispatch(toggleButton());
+        },
+    };
 };

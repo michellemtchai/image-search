@@ -104,3 +104,15 @@ body,
 .entry > p {
     padding: 10px;
 }
+.pagination {
+    width: 100%;
+    text-align: center;
+}
+.pagination button {
+    display: inline-block;
+    padding: 5px 10px;
+}
+.pagination p {
+    display: inline-block;
+    padding: 0 10px;
+}

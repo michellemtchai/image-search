@@ -2,12 +2,12 @@ const SERVER_ROOT =
 	process.env.REACT_APP_ENV === 'development'
 		? `http://localhost:${process.env.REACT_APP_PORT}`
 		: '';
-export const searchTerm = (props) => {
+export const searchTerm = (props, page) => {
 	let input = props.search.input.trim();
 	if (input.length > 0) {
 		let url = `${SERVER_ROOT}/query/${encodeURIComponent(
 			input
-		)}?page=${props.search.page}`;
+		)}?page=${page}`;
 		let next = (data) => {
 			props.setSearch(data);
 			setRecentSearches(props);
