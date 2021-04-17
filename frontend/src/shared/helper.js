@@ -1,5 +1,5 @@
 const SERVER_ROOT =
-	process.env.REACT_APP_ENV === 'development'
+	process.env.NODE_ENV === 'development'
 		? `http://localhost:${process.env.REACT_APP_PORT}`
 		: '';
 export const searchTerm = (props, page) => {

@@ -20,4 +20,4 @@ WORKDIR /app
 # copy react build files
 RUN mv /app/frontend/build/* /app/public
 RUN node /app/docker/deploy.js
-RUN rm .env
+rm .env

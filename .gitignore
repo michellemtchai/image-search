@@ -119,4 +119,4 @@ dist
 .db_data/
 
 # ignore apidocs
-.apidocs/
+docs/

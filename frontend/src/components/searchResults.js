@@ -3,18 +3,25 @@ import SearchResult from './searchResult';
 import Pagination from './pagination';
 import loader from '../assets/loader.gif';
 
+const loaderImg =
+    process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_PUBLIC_URL + loader
+        : loader;
+
 class SearchResults extends React.Component {
     render() {
         let data = this.props.search.results;
+        console.log(
+            'env',
+            process.env.REACT_APP_ENV,
+            process.env.REACT_APP_PUBLIC_URL,
+            loaderImg
+        );
         if (Object.keys(data).length > 0) {
             if (this.props.search.fetching) {
-                loader =
-                    process.env.APP_ENV === 'production'
-                        ? process.env.APP_PUBLIC_URL + loader
-                        : loader;
                 return (
                     <p className="loader">
-                        <img src={loader} />
+                        <img src={loaderImg} />
                     </p>
                 );
             } else {
