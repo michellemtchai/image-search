@@ -8,6 +8,10 @@ class SearchResults extends React.Component {
         let data = this.props.search.results;
         if (Object.keys(data).length > 0) {
             if (this.props.search.fetching) {
+                loader =
+                    process.env.APP_ENV === 'production'
+                        ? process.env.APP_PUBLIC_URL + loader
+                        : loader;
                 return (
                     <p className="loader">
                         <img src={loader} />

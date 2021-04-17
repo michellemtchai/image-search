@@ -8,7 +8,7 @@
         "all": "./run.sh",
         "prod": "node server.js",
         "start": "nodemon server.js ",
-        "build": "bash ./heroku-deploy.sh",
+        "build": "bash ./heroku-build.sh",
         "doc": "apidoc -i . -o ./.apidocs/ -f \".*\\.js$\" -f \".*\\.ts$\" -e ./node_modules -e ./.apidocs"
     },
     "dependencies": {
