@@ -41,7 +41,11 @@ export const search = (state = initialState, action) => {
 		case actions.SET_PAGE:
 			return { ...state, page: action.data };
 		case actions.TOGGLE_TAB:
-			return { ...state, search: !state.search };
+			return {
+				...state,
+				search: !state.search,
+				error: '',
+			};
 		case actions.START_FETCH:
 			return { ...state, fetching: true };
 		default:
