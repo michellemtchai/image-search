@@ -11,12 +11,6 @@ const loaderImg =
 class SearchResults extends React.Component {
     render() {
         let data = this.props.search.results;
-        console.log(
-            'env',
-            process.env.REACT_APP_ENV,
-            process.env.REACT_APP_PUBLIC_URL,
-            loaderImg
-        );
         if (Object.keys(data).length > 0) {
             if (this.props.search.fetching) {
                 return (
