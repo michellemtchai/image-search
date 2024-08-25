@@ -1,12 +1,11 @@
 const path = require('path');
-require('dotenv').config({
-    path: path.resolve(__dirname, '../.env'),
-});
+require('dotenv').config();
 const fs = require('fs');
 const ejs = require('ejs');
-const manifestData = require('../assets/manifest');
+const manifestData = require('./assets/manifest');
 
-const cssRegex = /(<link\s+href=\")([a-zA-Z\/\.0-9]+)(\"\s+rel=\"stylesheet\">)/g;
+const cssRegex =
+    /(<link\s+href=\")([a-zA-Z\/\.0-9]+)(\"\s+rel=\"stylesheet\">)/g;
 const jsRegex = /(<script\s+src=\")([\/a-zA-Z.0-9]+)(\"><\/script>)/g;
 
 const getFileList = (data, regex) => {
@@ -22,25 +21,18 @@ const getScript = (data) => {
     let match = data.match(regex);
     let script = '';
     if (match) {
-        script = match[2].replace(
-            /(<\/script><script src=\".+\">)/,
-            ''
-        );
+        script = match[2].replace(/(<\/script><script src=\".+\">)/, '');
     }
     return script;
 };
 const readFile = (file, action) => {
-    fs.readFile(
-        path.resolve(__dirname, file),
-        'utf8',
-        (err, data) => {
-            if (err) {
-                console.log(err.message);
-            } else {
-                action(data);
-            }
+    fs.readFile(path.resolve(__dirname, file), 'utf8', (err, data) => {
+        if (err) {
+            console.log(err.message);
+        } else {
+            action(data);
         }
-    );
+    });
 };
 const writeFile = (file, data) => {
     fs.writeFile(path.resolve(__dirname, file), data, (err) => {
@@ -53,9 +45,8 @@ const writeFile = (file, data) => {
 };
 
 const rewriteIndex = (css, js) => {
-    readFile('../views/pages/index.ejs', (data) => {
-        let viewsPath =
-            path.resolve(__dirname, '../views/') + '/';
+    readFile('./views/pages/index.ejs', (data) => {
+        let viewsPath = path.resolve(__dirname, './views/') + '/';
         let html = ejs.render(data, {
             rootPath: viewsPath,
             icons: manifestData.icons,
@@ -67,12 +58,12 @@ const rewriteIndex = (css, js) => {
                 js: js,
             },
         });
-        writeFile('../public/index.html', html);
+        writeFile('./public/index.html', html);
     });
 };
 
-readFile('../public/index.html', (data) => {
-    writeFile('../public/setup.js', getScript(data));
+readFile('./public/index.html', (data) => {
+    writeFile('./public/setup.js', getScript(data));
     let css = getFileList(data, cssRegex);
     let js = ['setup.js', ...getFileList(data, jsRegex)];
     rewriteIndex(css, js);
