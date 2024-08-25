@@ -6,4 +6,3 @@ yarn build
 cd ../
 mv ./frontend/build/* ./public
 node ./docker/deploy.js
-rm .env
