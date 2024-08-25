@@ -2,7 +2,7 @@ const path = require('path');
 require('dotenv').config();
 const fs = require('fs');
 const ejs = require('ejs');
-const manifestData = require('./assets/manifest');
+const manifestData = require('../assets/manifest');
 
 const cssRegex =
     /(<link\s+href=\")([a-zA-Z\/\.0-9]+)(\"\s+rel=\"stylesheet\">)/g;
