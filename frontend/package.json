@@ -12,7 +12,7 @@
         "redux": "^4.0.5"
     },
     "scripts": {
-        "build": "react-scripts build",
+        "build": "npx react-scripts build",
         "start": "PORT=\"$FRONTEND_PORT\" react-scripts start"
     },
     "browserslist": {
