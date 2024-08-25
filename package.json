@@ -5,10 +5,9 @@
     "license": "MIT",
     "main": "server.js",
     "scripts": {
-        "all": "./run.sh",
         "prod": "node server.js",
         "start": "nodemon server.js ",
-        "build": "bash ./heroku-build.sh",
+        "postinstall": "./heroku-build.sh",
         "doc": "apidoc -i . -o ./docs/ -f \".*\\.js$\" -f \".*\\.ts$\" -e ./node_modules -e ./docs"
     },
     "dependencies": {
