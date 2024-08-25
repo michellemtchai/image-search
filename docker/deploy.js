@@ -45,8 +45,8 @@ const writeFile = (file, data) => {
 };
 
 const rewriteIndex = (css, js) => {
-    readFile('./views/pages/index.ejs', (data) => {
-        let viewsPath = path.resolve(__dirname, './views/') + '/';
+    readFile('../views/pages/index.ejs', (data) => {
+        let viewsPath = path.resolve(__dirname, '../views/') + '/';
         let html = ejs.render(data, {
             rootPath: viewsPath,
             icons: manifestData.icons,
@@ -58,12 +58,12 @@ const rewriteIndex = (css, js) => {
                 js: js,
             },
         });
-        writeFile('./public/index.html', html);
+        writeFile('../public/index.html', html);
     });
 };
 
-readFile('./public/index.html', (data) => {
-    writeFile('./public/setup.js', getScript(data));
+readFile('../public/index.html', (data) => {
+    writeFile('../public/setup.js', getScript(data));
     let css = getFileList(data, cssRegex);
     let js = ['setup.js', ...getFileList(data, jsRegex)];
     rewriteIndex(css, js);
