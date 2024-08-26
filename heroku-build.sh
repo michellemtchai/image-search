@@ -1,6 +1,6 @@
 #! /bin/sh
 cd ./frontend
-yarn install
+yarn install --production
 yarn build
 
 cd ../
