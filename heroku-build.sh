@@ -1,8 +1,8 @@
 #! /bin/sh
 cd ./frontend
-yarn install --production
+yarn install
 yarn build
 
 cd ../
-mv ./frontend/build ./public
+cp -R ./frontend/build/* ./public
 node ./docker/deploy.js

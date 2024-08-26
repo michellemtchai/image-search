@@ -1,12 +1,12 @@
 const path = require('path');
-require('dotenv').config();
 const fs = require('fs');
 const ejs = require('ejs');
 const manifestData = require('../assets/manifest');
 
 const cssRegex =
     /(<link\s+href=\")([a-zA-Z\/\.0-9]+)(\"\s+rel=\"stylesheet\">)/g;
-const jsRegex = /(<script\s+src=\")([\/a-zA-Z.0-9]+)(\"><\/script>)/g;
+const jsRegex =
+    /(<script\s+defer=\"defer\"\s+src=\")([\/a-zA-Z.0-9]+)(\"><\/script>)/g;
 
 const getFileList = (data, regex) => {
     let match = data.matchAll(regex);
@@ -63,8 +63,14 @@ const rewriteIndex = (css, js) => {
 };
 
 readFile('../public/index.html', (data) => {
-    writeFile('../public/setup.js', getScript(data));
+    console.log('indexhtml', data);
     let css = getFileList(data, cssRegex);
-    let js = ['setup.js', ...getFileList(data, jsRegex)];
+    let js = getFileList(data, jsRegex);
+    let inBodyScript = getScript(data);
+    if (inBodyScript.length > 0) {
+        writeFile('../public/setup.js', inBodyScript);
+        js = ['setup.js', ...js];
+    }
+    console.log('list', css, js);
     rewriteIndex(css, js);
 });
